@@ -3,9 +3,11 @@ const rootRoutes = require("./routes/root");
 const createError = require("http-errors");
 const cookieParser = require("cookie-parser");
 const requestTime = require("./middleware/request-time");
+const testRoute = require("./routes/test/index.js");
 const morgan = require("morgan");
 
 const express = require("express");
+require("dotenv").config();
 const app = express();
 
 app.use(morgan("dev"));
@@ -31,6 +33,7 @@ if (process.env.NODE_ENV == "development") {
 }
 
 app.use("/", rootRoutes);
+app.use("/test", testRoute);
 
 const PORT = process.env.PORT || 3000;
 
